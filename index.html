@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        select {
+            font-size: 16px;
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f9e7;
+            border-radius: 5px;
+            border: 1px solid #d4edda;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Symptom Checker</h1>
+
+        <form method="POST">
+            <label for="symptom">Select a symptom:</label>
+            <select name="symptom" id="symptom" required>
+                <option value="">Choose...</option>
+                {% for symptom in symptoms %}
+                    <option value="{{ symptom }}" {% if symptom == selected_symptom %}selected{% endif %}>{{ symptom }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Check Diagnosis</button>
+        </form>
+
+        {% if diagnosis %}
+            <div class="result">
+                <h3>Diagnosis:</h3>
+                <p>{{ diagnosis }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
